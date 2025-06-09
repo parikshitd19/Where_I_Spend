@@ -1,6 +1,8 @@
 // lib/api.ts
 import ky from 'ky';
-import { CreatePrimaryCategory, PrimaryCategory, UpdatePrimaryCategory } from '@/types';
+import { CreatePrimaryCategory, PrimaryCategory, UpdatePrimaryCategory, 
+  CreateSecondaryCategory, SecondaryCategory, UpdateSecondaryCategory} from '@/types';
+
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -31,4 +33,22 @@ export const updatePrimaryCategory = async (
   data: UpdatePrimaryCategory
 ): Promise<PrimaryCategory> => {
   return api.put(`primary_category/${id}/`, { json: data }).json();
+};
+
+export const getSecondaryCategories = async (): Promise<SecondaryCategory[]> => {
+  return api.get('secondary-category/').json();
+};
+
+export const createSecondaryCategory = async (data: CreateSecondaryCategory) => {
+  return api.post('secondary-category/', { json: data }).json();
+};
+
+export const deleteSecondaryCategory = async (id: number) => {
+  return api.delete(`secondary-category/${id}/`).json();
+};
+export const updateSecondaryCategory = async (
+  id: number,
+  data: UpdateSecondaryCategory
+): Promise<SecondaryCategory> => {
+  return api.put(`secondary-category/${id}/`, { json: data }).json();
 };

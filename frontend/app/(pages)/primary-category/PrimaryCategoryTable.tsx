@@ -14,6 +14,9 @@ import {
   updatePrimaryCategory,
   deletePrimaryCategory,
 } from '@/lib/api';
+import {Input} from "@/components/ui/input" ;
+import {Button} from "@/components/ui/button"
+
 
 export default function PrimaryCategoryTable() {
   const [data, setData] = useState<PrimaryCategory[]>([]);
@@ -60,7 +63,7 @@ export default function PrimaryCategoryTable() {
         const row = info.row.original;
         if (editingId === row.id) {
           return (
-            <input
+            <Input
               className="border p-1 rounded"
               defaultValue={row.name}
               onChange={e => (row.name = e.target.value)}
@@ -77,7 +80,7 @@ export default function PrimaryCategoryTable() {
         const row = info.row.original;
         if (editingId === row.id) {
           return (
-            <input
+            <Input
               className="border p-1 rounded"
               defaultValue={row.description}
               onChange={e => (row.description = e.target.value)}
@@ -93,7 +96,7 @@ export default function PrimaryCategoryTable() {
         const row = info.row.original;
         return editingId === row.id ? (
           <div className="flex gap-2">
-            <button
+            <Button
               className="px-2 py-1 bg-green-500 text-white rounded"
               onClick={() =>
                 handleUpdate(row.id, {
@@ -103,28 +106,28 @@ export default function PrimaryCategoryTable() {
               }
             >
               Save
-            </button>
-            <button
+            </Button>
+            <Button
               className="px-2 py-1 bg-gray-400 text-white rounded"
               onClick={() => setEditingId(null)}
             >
               Cancel
-            </button>
+            </Button>
           </div>
         ) : (
           <div className="flex gap-2">
-            <button
+            <Button
               className="px-2 py-1 bg-blue-500 text-white rounded"
               onClick={() => setEditingId(row.id)}
             >
               Edit
-            </button>
-            <button
+            </Button>
+            <Button
               className="px-2 py-1 bg-red-500 text-white rounded"
               onClick={() => handleDelete(row.id)}
             >
               Delete
-            </button>
+            </Button>
           </div>
         );
       },
@@ -139,10 +142,10 @@ export default function PrimaryCategoryTable() {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Primary Categories</h2>
+      <h2 className="text-xl font-bold mb-4">Add new Primary Categories</h2>
 
       <div className="flex gap-2 mb-4">
-        <input
+        <Input
           className="border p-2 rounded w-64"
           placeholder="Name"
           value={newCategory.name || ''}
@@ -150,7 +153,7 @@ export default function PrimaryCategoryTable() {
             setNewCategory({ ...newCategory, name: e.target.value })
           }
         />
-        <input
+        <Input
           className="border p-2 rounded w-64"
           placeholder="Description"
           value={newCategory.description || ''}
@@ -158,12 +161,12 @@ export default function PrimaryCategoryTable() {
             setNewCategory({ ...newCategory, description: e.target.value })
           }
         />
-        <button
+        <Button
           className="px-4 py-2 bg-green-600 text-white rounded"
           onClick={handleCreate}
         >
           Add
-        </button>
+        </Button>
       </div>
 
       <table className="min-w-full border rounded">

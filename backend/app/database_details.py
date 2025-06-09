@@ -2,7 +2,7 @@ from sqlmodel import SQLModel, create_engine, Session
 import databases
 from typing import Generator
 
-postgres_url=f'postgresql://postgres:postgres123@10.110.39.56:5432/db'
+postgres_url=f'postgresql://postgres:postgres123@192.168.0.62:5432/db'
 
 engine = create_engine(postgres_url)
 # database_obj = databases.Database(postgres_url)

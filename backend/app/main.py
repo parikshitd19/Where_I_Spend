@@ -21,8 +21,8 @@ app.add_middleware(
 app.include_router(primary_category.router)
 app.include_router(secondary_category.router)
 app.include_router(transaction.router)
-for route in app.routes:
-    print(route.path, route.methods)
+# for route in app.routes:
+#     print(route.path, route.methods)
 @app.on_event("startup")
 async def on_startup():
     print("Creating Tables",flush=True)
@@ -30,8 +30,6 @@ async def on_startup():
 
 @app.get("/")
 def read_root():
-    for route in app.routes:
-        print(route.path, route.methods,flush = True)
     return {"Hello": "World"}
 
 # @app.post("/create_prim_cat")

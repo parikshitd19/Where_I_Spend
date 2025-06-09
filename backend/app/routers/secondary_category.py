@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session, select
+from sqlalchemy.orm import selectinload
 from typing import List
 
 from app.models.secondary_category_model import (
@@ -10,7 +11,7 @@ from app.models.secondary_category_model import (
 )
 from app.database_details import get_session
 
-router = APIRouter(prefix="/secondary-categories", tags=["Secondary Categories"])
+router = APIRouter(prefix="/secondary-category", tags=["Secondary Categories"])
 
 
 @router.post("/", response_model=SecondaryCategoryRead)
@@ -18,6 +19,7 @@ def create_secondary_category(
     category: SecondaryCategoryCreate,
     session: Session = Depends(get_session),
 ):
+    print(category,flush=True)
     db_category = SecondaryCategory.from_orm(category)
     session.add(db_category)
     session.commit()
@@ -27,18 +29,33 @@ def create_secondary_category(
 
 @router.get("/", response_model=List[SecondaryCategoryRead])
 def read_secondary_categories(session: Session = Depends(get_session)):
-    categories = session.exec(select(SecondaryCategory)).all()
-    return categories
+    statement = (
+        select(SecondaryCategory)
+        .options(selectinload(SecondaryCategory.primary_category))
+    )
+    results = session.exec(statement).all()
+    return results
+    # categories = session.exec(select(SecondaryCategory)).all()
+    # return categories
 
 
 @router.get("/{category_id}", response_model=SecondaryCategoryRead)
 def read_secondary_category(category_id: int, session: Session = Depends(get_session)):
-    category = session.get(SecondaryCategory, category_id)
-    if not category:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Secondary category not found"
-        )
-    return category
+    # category = session.get(SecondaryCategory, category_id)
+    # if not category:
+    #     raise HTTPException(
+    #         status_code=status.HTTP_404_NOT_FOUND, detail="Secondary category not found"
+    #     )
+    # return category
+    statement = (
+        select(SecondaryCategory)
+        .where(SecondaryCategory.id == category_id)
+        .options(selectinload(SecondaryCategory.primary_category))
+    )
+    result = session.exec(statement).first()
+    if not result:
+        raise HTTPException(status_code=404, detail="Secondary category not found")
+    return result
 
 
 @router.put("/{category_id}", response_model=SecondaryCategoryRead)

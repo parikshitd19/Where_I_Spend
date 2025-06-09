@@ -10,7 +10,8 @@ export interface SecondaryCategory {
   id: number;
   name: string;
   description?: string;
-  primary_cat_id: number;
+  primary_category_id: number;
+  primary_category?: PrimaryCategory;
 }
 
 export interface Transaction {

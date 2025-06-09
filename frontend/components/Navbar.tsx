@@ -10,7 +10,7 @@ const navItems = [
     label: 'Config',
     dropdown: [
       { label: 'Primary Categories', href: '/primary-category' },
-      { label: 'Secondary Categories', href: '/secondary-categories' },
+      { label: 'Secondary Categories', href: '/secondary-category' },
     ],
   },
   { label: 'Transactions', href: '/transactions' },

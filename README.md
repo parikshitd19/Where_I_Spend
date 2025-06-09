@@ -3,7 +3,7 @@ This web app helps manage your expenses.
 
 To deploy the app:
  - Install Docker & Docker Compose on the system
- - Inside the ```docker-compose.yaml``` specify the following in ```the postgres_db``` service
+ - Inside the [docker-compose.yaml](docker-compose.yaml) specify the following in ```postgres_db``` service
  ```
   environment:
     - POSTGRES_USER=<username>
@@ -11,7 +11,7 @@ To deploy the app:
     - POSTGRES_DB=<DB Name>
  ```
 
- - Inside ```frontend/app/database_details.py``` specify the following matching the value in the ```docker-compose.yaml``` 
+ - Inside [database_details.py](backend/app/database_details.py) specify the following matching the value in the [docker-compose.yaml](docker-compose.yaml)
  ```
  postgres_url=f'postgresql://<username>:<password>@<Specify-IP-Address>:5432/<DB Name>'
 

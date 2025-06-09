@@ -1,5 +1,6 @@
 from typing import Optional, List, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
+from .primary_category_model import PrimaryCategoryRead
 
 if TYPE_CHECKING:
     from .primary_category_model import PrimaryCategory
@@ -16,6 +17,7 @@ class SecondaryCategoryCreate(SecondaryCategoryBase):
 
 class SecondaryCategoryRead(SecondaryCategoryBase):
     id: int
+    primary_category: Optional[PrimaryCategoryRead] = None
 
 class SecondaryCategoryUpdate(SQLModel):
     name: Optional[str] = None
