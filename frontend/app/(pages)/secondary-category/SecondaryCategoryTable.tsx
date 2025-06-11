@@ -5,15 +5,7 @@ import { PrimaryCategory, SecondaryCategory, UpdateSecondaryCategory } from '@/t
 import { createSecondaryCategory, deleteSecondaryCategory, getPrimaryCategories, getSecondaryCategories, updateSecondaryCategory } from '@/lib/api';
 import {Input} from "@/components/ui/input" ;
 import {Button} from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,} from "@/components/ui/select";
 import { devNull } from 'node:os';
 
 export default function SecondaryCategoryTable() {

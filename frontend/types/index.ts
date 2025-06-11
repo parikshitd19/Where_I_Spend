@@ -16,11 +16,12 @@ export interface SecondaryCategory {
 
 export interface Transaction {
   id: string;
-  amount: string; // or number if you plan to parse it
+  amount: number; // or number if you plan to parse it
   place: string;
   details?: string;
-  transaction_date: string; // ISO format (e.g. "2024-06-01")
+  transaction_date: Date; // ISO format (e.g. "2024-06-01")
   secondary_category_id: number;
+  primary_category_id: number;
 }
 
 // Create/update types

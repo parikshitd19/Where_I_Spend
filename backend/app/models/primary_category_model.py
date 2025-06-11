@@ -3,6 +3,7 @@ from sqlmodel import SQLModel, Field, Relationship
 
 if TYPE_CHECKING:
     from .secondary_category_model import SecondaryCategory
+    from .transaction_model import Transaction
 
 
 class PrimaryCategoryBase(SQLModel):
@@ -22,3 +23,4 @@ class PrimaryCategoryRead(PrimaryCategoryBase):
 class PrimaryCategory(PrimaryCategoryBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     secondary_categories: List["SecondaryCategory"] = Relationship(back_populates="primary_category")
+    transactions: List["Transaction"] = Relationship(back_populates="primary_category")
