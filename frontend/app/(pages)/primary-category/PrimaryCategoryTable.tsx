@@ -32,6 +32,7 @@ export default function PrimaryCategoryTable() {
 
   const loadData = async () => {
     const result = await getPrimaryCategories();
+    
     setData(result);
   };
 

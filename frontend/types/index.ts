@@ -22,6 +22,8 @@ export interface Transaction {
   transaction_date: Date; // ISO format (e.g. "2024-06-01")
   secondary_category_id: number;
   primary_category_id: number;
+  primary_category?: PrimaryCategory;
+  secondary_category?: SecondaryCategory;
 }
 
 // Create/update types

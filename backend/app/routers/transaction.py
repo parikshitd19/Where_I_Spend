@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session, select
 from typing import List
+from sqlalchemy.orm import selectinload
 
 from app.models.transaction_model import (
     Transaction,
@@ -27,8 +28,19 @@ def create_transaction(
 
 @router.get("/", response_model=List[TransactionRead])
 def read_transactions(session: Session = Depends(get_session)):
-    transactions = session.exec(select(Transaction)).all()
-    return transactions
+    statement = select(Transaction).options(
+        selectinload(Transaction.primary_category),
+        selectinload(Transaction.secondary_category)
+    )
+    # transactions = session.exec(select(Transaction)).all()
+    # statement = (
+    #     select(Transaction)
+    #     .options(selectinload(Transaction.primary_category),selectinload(Transaction.secondary_category))
+    # )
+    results = session.exec(statement).all()
+    print(results[0],flush=True);
+    return results
+    # return transactions
 
 
 @router.get("/{transaction_id}", response_model=TransactionRead)

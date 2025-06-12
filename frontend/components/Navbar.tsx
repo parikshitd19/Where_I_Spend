@@ -21,6 +21,7 @@ export default function Navbar() {
         {
             'menu_label':"Transaction",'sub_menu_items':[
                 {'label':'Add a Transaction','href':'/add-transaction'},
+                {'label':'View Transactions','href':'/view-transactions'}
             ]
         }
         

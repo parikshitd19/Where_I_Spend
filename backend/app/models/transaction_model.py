@@ -1,4 +1,6 @@
 from typing import Optional, TYPE_CHECKING
+from .primary_category_model import PrimaryCategoryRead
+from .secondary_category_model import SecondaryCategoryRead
 from sqlmodel import SQLModel, Field, Relationship
 from uuid import UUID, uuid4
 from datetime import date
@@ -29,6 +31,8 @@ class TransactionUpdate(SQLModel):
 
 class TransactionRead(TransactionBase):
     id: UUID
+    primary_category: Optional[PrimaryCategoryRead] = None
+    secondary_category: Optional[SecondaryCategoryRead] = None
 
 class Transaction(TransactionBase, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True, index=True)
