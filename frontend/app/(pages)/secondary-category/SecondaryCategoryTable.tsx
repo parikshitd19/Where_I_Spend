@@ -1,19 +1,19 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import {ColumnDef, flexRender, getCoreRowModel, useReactTable} from '@tanstack/react-table';
+import {ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel,useReactTable,getSortedRowModel} from '@tanstack/react-table';
 import { PrimaryCategory, SecondaryCategory, UpdateSecondaryCategory } from '@/types';
 import { createSecondaryCategory, deleteSecondaryCategory, getPrimaryCategories, getSecondaryCategories, updateSecondaryCategory } from '@/lib/api';
 import {Input} from "@/components/ui/input" ;
 import {Button} from "@/components/ui/button";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue,} from "@/components/ui/select";
-import { devNull } from 'node:os';
+import TableControlButtons from '@/components/TableControlButtons';
 
 export default function SecondaryCategoryTable() {
     const [data, setData] = useState<SecondaryCategory[]>([]);
     const [primaryCategoryData, setPrimaryCategoryData] = useState<PrimaryCategory[]>([]);
     const [editingId, setEditingId] = useState<number | null>(null);
     const [newCategory, setNewCategory] = useState<Partial<SecondaryCategory>>({});
-
+    const [sorting, setSorting] = useState([{ id: "id", desc: false }]); 
     useEffect(() => {
         loadData();
       }, []);
@@ -47,6 +47,8 @@ export default function SecondaryCategoryTable() {
             {
                 header: 'ID',
                 accessorKey: 'id',
+                sortingFn: 'alphanumeric',
+                sortDescFirst: false,
                 cell: info => info.getValue(),
             },
             {
@@ -158,6 +160,16 @@ export default function SecondaryCategoryTable() {
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        state: { sorting },
+        onSortingChange: setSorting,
+        initialState: {
+            pagination: {
+            pageIndex: 0, //custom initial page index
+            pageSize: 10, //custom default page size
+            },
+        },
       });
     return (
         <div className="p-4">
@@ -226,6 +238,7 @@ export default function SecondaryCategoryTable() {
                     ))}
                 </tbody>
             </table>
+            <TableControlButtons table={table}/>
         </div>
     );
 }

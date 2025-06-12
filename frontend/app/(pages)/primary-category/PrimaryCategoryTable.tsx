@@ -5,7 +5,7 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
-  useReactTable,
+  useReactTable,getPaginationRowModel,getSortedRowModel
 } from '@tanstack/react-table';
 import { PrimaryCategory, UpdatePrimaryCategory } from '@/types';
 import {
@@ -16,12 +16,15 @@ import {
 } from '@/lib/api';
 import {Input} from "@/components/ui/input" ;
 import {Button} from "@/components/ui/button"
+import TableControlButtons from '@/components/TableControlButtons';
 
 
 export default function PrimaryCategoryTable() {
   const [data, setData] = useState<PrimaryCategory[]>([]);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [newCategory, setNewCategory] = useState<Partial<PrimaryCategory>>({});
+  const [sorting, setSorting] = useState([{ id: "id", desc: false }]); 
+  
 
   useEffect(() => {
     loadData();
@@ -55,6 +58,8 @@ export default function PrimaryCategoryTable() {
       header: 'ID',
       accessorKey: 'id',
       cell: info => info.getValue(),
+      sortingFn: 'alphanumeric',
+      sortDescFirst: false,
     },
     {
       header: 'Name',
@@ -138,7 +143,17 @@ export default function PrimaryCategoryTable() {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  });
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    state: { sorting },
+    onSortingChange: setSorting,
+    initialState: {
+        pagination: {
+        pageIndex: 0, //custom initial page index
+        pageSize: 10, //custom default page size
+        },
+    },
+  })
 
   return (
     <div className="p-4">
@@ -196,6 +211,7 @@ export default function PrimaryCategoryTable() {
           ))}
         </tbody>
       </table>
+      <TableControlButtons table={table}/>
     </div>
   );
 }
