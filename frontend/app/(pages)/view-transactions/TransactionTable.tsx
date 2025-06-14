@@ -8,7 +8,7 @@ import TableControlButtons from "@/components/TableControlButtons";
 
 export default function TransactionTable(){
     const [data, setData] = useState<Transaction[]>([]);
-    const [sorting, setSorting] = useState([{ id: 'transaction_date', desc: false }]); 
+    const [sorting, setSorting] = useState([{ id: 'transaction_date', desc: true }]); 
     
     useEffect(() => {
         loadData();

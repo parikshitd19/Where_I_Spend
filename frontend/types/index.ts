@@ -26,6 +26,13 @@ export interface Transaction {
   secondary_category?: SecondaryCategory;
 }
 
+export interface MonthSummaryStats{
+  month: string;
+  year: number;
+  total_spent: number;
+  total_num_transactions: number;
+}
+
 // Create/update types
 
 export type CreatePrimaryCategory = Omit<PrimaryCategory, 'id'>;

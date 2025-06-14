@@ -4,7 +4,8 @@ import { CreatePrimaryCategory, PrimaryCategory, UpdatePrimaryCategory,
   CreateSecondaryCategory, SecondaryCategory, UpdateSecondaryCategory,
   Transaction,
   CreateTransaction,
-  UpdateTransaction} from '@/types';
+  UpdateTransaction,
+  MonthSummaryStats} from '@/types';
 
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -73,3 +74,7 @@ export const updateTransaction = async (
 ): Promise<Transaction> => {
   return api.put(`transactions/${id}/`, { json: data }).json();
 };
+
+export const getMonthSummaryData = async ():Promise<MonthSummaryStats> => {
+  return api.get('transactions/get_curr_month_summary/').json();
+}

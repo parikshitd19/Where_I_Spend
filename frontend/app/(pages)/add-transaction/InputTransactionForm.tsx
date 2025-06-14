@@ -74,8 +74,10 @@ export default function InputTransactionForm(){
     try {
         const payload = {
         ...values,
-        transaction_date: values.transaction_date.toISOString().split("T")[0],
+        // transaction_date: values.transaction_date.toISOString().split("T")[0],
+        transaction_date:format(values.transaction_date, "yyyy-MM-dd"),
         };
+        console.log(payload);
         const transaction_result = await createTransaction(payload);
         console.log(transaction_result);
         toast.success("Transaction successfully added");

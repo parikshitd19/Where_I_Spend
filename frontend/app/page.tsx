@@ -1,5 +1,6 @@
 // app/page.tsx
 import Link from 'next/link';
+import MonthSummaryCard from './MonthSummaryCard';
 
 export default function HomePage() {
   return (
@@ -8,6 +9,15 @@ export default function HomePage() {
       <p className="text-lg mb-8 text-gray-700">
         Track your expenses easily and stay on top of your finances.
       </p>
+      <div className='grid grid-cols-4'>
+        <div></div>
+        <div>
+          <MonthSummaryCard/>
+        </div>
+        <div></div>
+        <div></div>
+      </div>
+      
     </div>
   );
 }
