@@ -13,17 +13,18 @@ export default function Navbar() {
     ];
     const menu_data = [
         {
-            'menu_label':"Config",'sub_menu_items':[
+            'menu_label':"Transaction",'sub_menu_items':[
+                {'label':'Record a new Transaction','href':'/add-transaction'},
+                {'label':'View Transactions Table','href':'/view-transactions'}
+            ]
+        },
+        {
+            'menu_label':"Configuration",'sub_menu_items':[
                 {'label':'Primary Category','href':'/primary-category'},
                 {'label':'Secondary Category','href':'/secondary-category'},
             ]
         },
-        {
-            'menu_label':"Transaction",'sub_menu_items':[
-                {'label':'Add a Transaction','href':'/add-transaction'},
-                {'label':'View Transactions','href':'/view-transactions'}
-            ]
-        }
+        
         
     ];
     return(

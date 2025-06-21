@@ -45,6 +45,13 @@ def read_transactions(session: Session = Depends(get_session)):
     return results
     # return transactions
 
+@router.get("/latest_transactions/{transaction_count}", response_model=List[TransactionRead])
+def get_latest_transactions(transaction_count:int,session: Session = Depends(get_session)):
+    statement = select(Transaction).order_by(Transaction.transaction_date.desc()).limit(transaction_count)
+    results = session.exec(statement).all()
+    print(results[0],flush=True)
+    return results
+
 @router.get("/get_curr_month_summary")
 def get_curr_month_summary(session: Session = Depends(get_session)):
     statement = select(
@@ -65,6 +72,7 @@ def get_curr_month_summary(session: Session = Depends(get_session)):
         'year':date.today().year,
         'total_spent':result[0],
         'total_num_transactions':result[1],
+        'avg_daily_spent':round(result[0]/(date.today().day),2)
     }
     return month_summary
 
@@ -108,4 +116,6 @@ def delete_transaction(transaction_id: str, session: Session = Depends(get_sessi
     session.delete(transaction)
     session.commit()
     return None
+
+
 

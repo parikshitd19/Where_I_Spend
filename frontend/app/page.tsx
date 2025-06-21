@@ -1,6 +1,6 @@
-// app/page.tsx
 import Link from 'next/link';
 import MonthSummaryCard from './MonthSummaryCard';
+import LatestTransactionsSummary from './LatestTransactionsSummary';
 
 export default function HomePage() {
   return (
@@ -9,15 +9,20 @@ export default function HomePage() {
       <p className="text-lg mb-8 text-gray-700">
         Track your expenses easily and stay on top of your finances.
       </p>
-      <div className='grid grid-cols-4'>
+      <div className='grid grid-cols-2'>
+      </div>
+      <div className='grid grid-cols-[250px_800px_200px] gap-2'>
         <div></div>
-        <div>
-          <MonthSummaryCard/>
+        <div className='grid grid-cols-2 gap-1'>
+          <div>
+            <MonthSummaryCard/>
+          </div>
+          <div>
+            <LatestTransactionsSummary transaction_count={4}/>
+          </div>
         </div>
         <div></div>
-        <div></div>
       </div>
-      
     </div>
   );
 }

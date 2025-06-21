@@ -77,4 +77,7 @@ export const updateTransaction = async (
 
 export const getMonthSummaryData = async ():Promise<MonthSummaryStats> => {
   return api.get('transactions/get_curr_month_summary/').json();
-}
+};
+export const getLatestTransactions = async(transaction_count: number):  Promise<Transaction[]> => {
+  return api.get(`transactions/latest_transactions/${transaction_count}`).json();
+};

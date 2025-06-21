@@ -31,6 +31,7 @@ export interface MonthSummaryStats{
   year: number;
   total_spent: number;
   total_num_transactions: number;
+  avg_daily_spent: number;
 }
 
 // Create/update types

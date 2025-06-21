@@ -18,16 +18,22 @@ export default function MonthSummaryCard(){
     console.log(data)
 
     return(
-        <Card className="bg-teal-200 w-[300px] max-w-sm">
+        <Card className="bg-teal-200 w-[350px] ">
             <CardHeader>
-                <CardTitle>{data?.month} {data?.year}</CardTitle>
+                <CardTitle>
+                    <div className="text-xl text-blue-500">
+                        {data?.month} {data?.year}
+                    </div>
+                </CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="grid grid-cols-[150px_100px] gap-2">
-                    <div className="flex justify-start">Total amount spent:</div>
-                    <div className="flex justify-end">AUD {data?.total_spent}</div>
-                    <div className="flex justify-start">No. of Transactions:</div>
+                <div className="grid grid-cols-[170px_100px] gap-2 text-blue-800">
+                    <div className="flex justify-start font-bold">No. of Transactions:</div>
                     <div className="flex justify-end">{data?.total_num_transactions}</div>
+                    <div className="flex justify-start font-bold">Total amount spent:</div>
+                    <div className="flex justify-end">AUD {data?.total_spent}</div>
+                    <div className="flex justify-start font-bold">Avg. daily spent:</div>
+                    <div className="flex justify-end">AUD {data?.avg_daily_spent}</div>
                 </div>
             </CardContent>
         </Card>
