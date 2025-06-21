@@ -18,7 +18,7 @@ To deploy the app:
 
  - Inside [database_details.py](backend/app/database_details.py) specify the following matching the value in the [docker-compose.yaml](docker-compose.yaml)
  ```
- postgres_url=f'postgresql://<username>:<password>@<Specify-IP-Address-of-Machine>:5432/<DB Name>'
+ postgres_url=f'postgresql://<username>:<password>@<Specify-IP-Address-of-Machine>:5431/<DB Name>'
 
  ```
  - Using the [.env.template](frontend/.env.template) create ```.env``` file in the frontend folder and specify the values
